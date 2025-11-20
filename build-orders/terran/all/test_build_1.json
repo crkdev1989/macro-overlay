@@ -1,0 +1,19 @@
+{
+    "build_name": "test build 1",
+    "race": "terran",
+    "matchup": "all",
+    "steps": [
+        {
+            "supply": "14",
+            "action": "supply depot"
+        },
+        {
+            "supply": "16",
+            "action": "barracks"
+        },
+        {
+            "supply": "20",
+            "action": "command center"
+        }
+    ]
+}

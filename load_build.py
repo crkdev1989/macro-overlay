@@ -75,4 +75,4 @@ def load_build():
             supply = int(supply_str)
             step = {"supply": supply,"action": action}
             steps.append(step)
-
+    return steps

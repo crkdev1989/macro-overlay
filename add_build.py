@@ -15,9 +15,15 @@ def add_build():
         print("Invalid choice")
     build_steps = []
     while True:
-        supply = input("Enter supply count for the step (or 'done' to finish): ").strip()
-        if supply.lower() == 'done':
+        supply = input("Enter supply count for the step (or 'done' to finish): ").strip().lower()
+        if supply == "done":
             break
+        if not supply.isdigit():
+            print("Invalid supply count. Please enter a number.")
+            continue
+            supply = int(supply)
+            
+
         action = input("Enter action for this supply count: ").strip()
         build_steps.append({"supply": supply, "action": action})
     build_data = {

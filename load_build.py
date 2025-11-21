@@ -2,7 +2,7 @@ import os
 import json
 
 def load_build():
-    race_choice  = input("Choose your race: 1 - Terran \n 2 - Protoss \n 3 - Zerg\n ")
+    race_choice  = input("Choose your race:\n 1 - Terran \n 2 - Protoss \n 3 - Zerg\n ")
 
     steps = []
     selected_race = ""
@@ -17,7 +17,7 @@ def load_build():
             print("Invalid choice") 
 
     if selected_race == "terran":
-        mu = input(" Matchup? 1 - TvZ \n 2 - TvT \n 3 - TvP \n 4 - all \n ")
+        mu = input(" Matchup?\n 1 - TvZ \n 2 - TvT \n 3 - TvP \n 4 - all \n ")
         if mu == "1":
             mu = "tvz"
         elif mu == "2":
@@ -30,7 +30,7 @@ def load_build():
             print("Invalid matchup choice")
 
     if selected_race == "protoss":
-        mu = input(" Matchup? 1 - PvZ \n 2 - PvT \n 3 - PvP \n 4 - all \n ")
+        mu = input(" Matchup?\n 1 - PvZ \n 2 - PvT \n 3 - PvP \n 4 - all \n ")
         if mu == "1":
             mu = "pvz"
         elif mu == "2":
@@ -43,7 +43,7 @@ def load_build():
             print("Invalid matchup choice")
 
     if selected_race == "zerg":
-        mu = input(" Matchup? 1 - ZvZ \n 2 - ZvT \n 3 - ZvP \n 4 - all \n ")
+        mu = input(" Matchup?\n 1 - ZvZ \n 2 - ZvT \n 3 - ZvP \n 4 - all \n ")
         if mu == "1":
             mu = "zvz"
         elif mu == "2":

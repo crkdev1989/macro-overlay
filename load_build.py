@@ -76,4 +76,3 @@ def load_build():
             step = {"supply": supply,"action": action}
             steps.append(step)
 
-load_build()

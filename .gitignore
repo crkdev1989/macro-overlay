@@ -1,4 +1,7 @@
 venv/
-.venv/
 todo.txt
 .venv
+venv
+.venv/
+__pycache__/
+*.pyc

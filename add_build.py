@@ -20,8 +20,9 @@ def add_build():
             break
         if not supply.isdigit():
             print("Invalid supply count. Please enter a number.")
-            continue
             supply = int(supply)
+            continue
+            
             
 
         action = input("Enter action for this supply count: ").strip()

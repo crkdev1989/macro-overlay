@@ -1,59 +1,23 @@
 import os
 import json
+from constants import RACE_MENU, MATCHUP_MENU, MATCHUP_PROMPTS
 
 def load_build():
-    race_choice  = input("Choose your race:\n 1 - Terran \n 2 - Protoss \n 3 - Zerg\n ")
-
     steps = []
-    selected_race = ""
+    while True:
+       race_choice = input("Choose your race:\n 1 - Terran \n 2 - Protoss \n 3 - Zerg\n ").strip()
+       if race_choice in RACE_MENU:
+           selected_race = RACE_MENU[race_choice]
+           break
+       print("Invalid choice, try again.")
 
-    if race_choice == "1":
-        selected_race = "terran"
-    elif race_choice == "2":
-        selected_race = "protoss"
-    elif race_choice == "3":
-        selected_race = "zerg"
-    else:
-            print("Invalid choice") 
-
-    if selected_race == "terran":
-        mu = input(" Matchup?\n 1 - TvZ \n 2 - TvT \n 3 - TvP \n 4 - all \n ")
-        if mu == "1":
-            mu = "tvz"
-        elif mu == "2":
-            mu = "tvt"
-        elif mu == "3":
-            mu = "tvp"
-        elif mu == "4":
-            mu = "all"
-        else:
-            print("Invalid matchup choice")
-
-    if selected_race == "protoss":
-        mu = input(" Matchup?\n 1 - PvZ \n 2 - PvT \n 3 - PvP \n 4 - all \n ")
-        if mu == "1":
-            mu = "pvz"
-        elif mu == "2":
-            mu = "pvt"
-        elif mu == "3":
-            mu = "pvp"
-        elif mu == "4":
-            mu = "all"
-        else:
-            print("Invalid matchup choice")
-
-    if selected_race == "zerg":
-        mu = input(" Matchup?\n 1 - ZvZ \n 2 - ZvT \n 3 - ZvP \n 4 - all \n ")
-        if mu == "1":
-            mu = "zvz"
-        elif mu == "2":
-            mu = "zvt"
-        elif mu == "3":
-            mu = "zvp"
-        elif mu == "4":
-            mu = "all"
-        else:
-            print("Invalid matchup choice")
+    # choose matchup for that race
+    while True:
+        mu_choice = input(MATCHUP_PROMPTS[selected_race]).strip()
+        if mu_choice in MATCHUP_MENU[selected_race]:
+            mu = MATCHUP_MENU[selected_race][mu_choice]
+            break
+        print("Invalid choice, try again.")
     
     build_list = os.listdir(f"build-orders/{selected_race}/{mu}/") 
     for number, file in enumerate(build_list, start=1 ):

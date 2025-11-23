@@ -1,42 +1,51 @@
-import os
 import json
+from pathlib import Path
 from constants import RACE_MENU, MATCHUP_MENU, MATCHUP_PROMPTS
 
 def load_build():
-    steps = []
+    # --- RACE SELECTION ---
     while True:
-       race_choice = input("Choose your race:\n 1 - Terran \n 2 - Protoss \n 3 - Zerg\n ").strip()
-       if race_choice in RACE_MENU:
-           selected_race = RACE_MENU[race_choice]
-           break
-       print("Invalid choice, try again.")
+        race_choice = input("Choose your race:\n 1 - Terran \n 2 - Protoss \n 3 - Zerg\n ").strip()
+        if race_choice in RACE_MENU:
+            selected_race = RACE_MENU[race_choice]
+            break
+        print("Invalid choice, try again.")
 
-    # choose matchup for that race
+    # --- MATCHUP SELECTION ---
     while True:
         mu_choice = input(MATCHUP_PROMPTS[selected_race]).strip()
         if mu_choice in MATCHUP_MENU[selected_race]:
-            mu = MATCHUP_MENU[selected_race][mu_choice]
+            matchup = MATCHUP_MENU[selected_race][mu_choice]
             break
         print("Invalid choice, try again.")
-    
-    build_list = os.listdir(f"build-orders/{selected_race}/{mu}/") 
-    for number, file in enumerate(build_list, start=1 ):
-        print(f"{number} - {file}")
-    user_choice = input("Select a build by number: ")
 
-    number = int(user_choice)
-    index = number - 1
-    chosen_build = build_list[index]
+    # --- PATHLIB ROOT DIRECTORY ---
+    build_root = Path("build-orders")
+    target_dir = build_root / selected_race / matchup
 
-    with open(f"build-orders/{selected_race}/{mu}/{chosen_build}", "r") as f:
-        print(f)
+    # --- LIST BUILDS ---
+    build_list = sorted(target_dir.iterdir())
+    if not build_list:
+        print("No builds found for that matchup.")
+        return []
 
-        for string in f:
-            clean = string.strip()
-            parts = clean.split(" ")
-            supply_str = parts[0]
-            action = " ".join(parts[1:])
-            supply = int(supply_str)
-            step = {"supply": supply,"action": action}
-            steps.append(step)
+    for number, file_path in enumerate(build_list, start=1):
+        print(f"{number} - {file_path.name}")
+
+    # --- USER PICK ---
+    user_choice = input("Select a build by number: ").strip()
+    index = int(user_choice) - 1
+    chosen_path = build_list[index]
+
+    # --- READ JSON ---
+    data = json.loads(chosen_path.read_text())
+
+    steps = []
+    for entry in data["steps"]:
+        steps.append({
+            "supply": int(entry["supply"]),
+            "action": entry["action"],
+        })
+
     return steps
+

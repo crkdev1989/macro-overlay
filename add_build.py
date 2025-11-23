@@ -1,5 +1,5 @@
-import os
 import json
+from pathlib import Path  
 from constants import RACE_MENU, MATCHUP_PROMPTS, MATCHUP_MENU
 
 def add_build():
@@ -44,15 +44,17 @@ def add_build():
         "steps": build_steps
     }
 
-    base_dir = "build-orders"
+   
+    build_root = Path("build-orders")  
     clean_name = build_name.strip().lower().replace(" ", "_")
-    file_path = os.path.join(base_dir, race, matchup, f"{clean_name}.json")
-    os.makedirs(os.path.dirname(file_path), exist_ok=True)
 
-    with open(file_path, "w") as f:
-        json.dump(build_data, f, indent=4)
+    file_path = build_root / race / matchup / f"{clean_name}.json"
+
+    
+    file_path.parent.mkdir(parents=True, exist_ok=True)
+
+    
+    file_path.write_text(json.dumps(build_data, indent=4), encoding="utf-8")
+    #
 
     print(f"Build '{build_name}' added successfully at {file_path}")
-
-# Run for testing:
-add_build()

@@ -1,0 +1,19 @@
+{
+    "build_name": "test7",
+    "race": "zerg",
+    "matchup": "zvz",
+    "steps": [
+        {
+            "supply": "14",
+            "action": "pool"
+        },
+        {
+            "supply": "16",
+            "action": "hatch"
+        },
+        {
+            "supply": "16",
+            "action": "extractor"
+        }
+    ]
+}

@@ -1,0 +1,15 @@
+{
+    "build_name": "test 8",
+    "race": "zerg",
+    "matchup": "zvz",
+    "steps": [
+        {
+            "supply": "14",
+            "action": "test"
+        },
+        {
+            "supply": "16",
+            "action": "test"
+        }
+    ]
+}
